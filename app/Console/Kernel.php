@@ -2,6 +2,9 @@
 
 namespace App\Console;
 
+use App\Console\Commands\AddAnalyticsClient;
+use App\Console\Commands\RefreshAnalyticsClientToken;
+use App\Console\Commands\RevokeAnalyticsClientToken;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -13,7 +16,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        AddAnalyticsClient::class,
+        RefreshAnalyticsClientToken::class,
+        RevokeAnalyticsClientToken::class
     ];
 
     /**
