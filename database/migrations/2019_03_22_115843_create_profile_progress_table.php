@@ -22,6 +22,7 @@ class CreateProfileProgressTable extends Migration
             $table->unsignedBigInteger('following');
             $table->unsignedInteger('total_posts');
             $table->dateTime('logged_at');
+            $table->index(['profile_id', 'logged_at']);
             $table->timestamps();
         });
     }
