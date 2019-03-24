@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProfileActivityTable extends Migration
+class CreateProfileActivitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProfileActivityTable extends Migration
      */
     public function up()
     {
-        Schema::create('profile_activity', function (Blueprint $table) {
+        Schema::create('profile_activities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('profile_id');
             $table->foreign('profile_id')
