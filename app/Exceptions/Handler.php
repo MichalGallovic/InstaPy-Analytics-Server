@@ -2,11 +2,10 @@
 
 namespace App\Exceptions;
 
-use App\Profile;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 
 class Handler extends ExceptionHandler
 {
@@ -52,26 +51,13 @@ class Handler extends ExceptionHandler
         if ($exception instanceof ApiValidationException) {
             return response()->json([
                 'error' => $exception->getMessage()
-            ], 400);
+            ], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         if ($exception instanceof AuthenticationException) {
             return response()->json([
                 'error' => $exception->getMessage()
-            ], 401);
-        }
-
-        if ($exception instanceof ModelNotFoundException) {
-            $models = [
-                Profile::class => "profile"
-            ];
-            $exceptionFromModel = $exception->getModel();
-
-            if (isset($models[$exceptionFromModel])) {
-                return response()->json([
-                    'error' => sprintf("Resource '%s' not found", $models[$exceptionFromModel])
-                ], 404);
-            }
+            ], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
         return parent::render($request, $exception);
