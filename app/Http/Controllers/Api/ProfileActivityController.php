@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CreateProfileActivityRequest;
 use App\Queries\ProfileActivityQuery;
+use Illuminate\Http\JsonResponse;
 
 class ProfileActivityController extends Controller
 {
@@ -28,10 +29,16 @@ class ProfileActivityController extends Controller
     {
         $validatedActivities = $request->validated();
 
-        $this->profileActivity->createMany($validatedActivities['data']);
+        $profileActivities = $this->profileActivity->createMany($validatedActivities['data']);
+
+        if ($profileActivities->isEmpty()) {
+            return response()->json([
+                'message' => 'No new profile activities were created'
+            ], JsonResponse::HTTP_OK);
+        }
 
         return response()->json([
             'message' => 'Profile activities were created successfully'
-        ]);
+        ], JsonResponse::HTTP_CREATED);
     }
 }

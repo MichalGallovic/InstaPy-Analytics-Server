@@ -31,7 +31,16 @@ class ProfileActivityQuery
      */
     public function create(string $profileName, array $profileActivity)
     {
-        $profile = $this->profile->where('name', $profileName)->firstOrFail();
+        $profile = $this->profile->where('name', $profileName)
+            ->firstOrCreate(['name' => $profileName]);
+
+        $hasActivity = $profile->profileActivity()
+            ->where('logged_at', $profileActivity['logged_at'])
+            ->count();
+
+        if ($hasActivity > 0) {
+            return null;
+        }
 
         $profileActivity = new ProfileActivity([
             'likes'        => $profileActivity['likes'],
@@ -42,16 +51,22 @@ class ProfileActivityQuery
             'logged_at'    => $profileActivity['logged_at'],
         ]);
 
-        $profile->profileActivity()->save($profileActivity);
+        return $profile->profileActivity()->save($profileActivity);
     }
 
     /**
      * @param array $profileActivities
+     *
+     * @return \Illuminate\Support\Collection
      */
     public function createMany(array $profileActivities)
     {
-        foreach ($profileActivities as $profileActivity) {
-            $this->create($profileActivity['profile_name'], $profileActivity);
-        }
+        return collect($profileActivities)
+            ->map(function ($profileActivity) {
+                return $this->create($profileActivity['profile_name'], $profileActivity);
+            })
+            ->filter(function ($profileActivity) {
+                return !is_null($profileActivity);
+            });
     }
 }
