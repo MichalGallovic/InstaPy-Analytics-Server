@@ -24,7 +24,7 @@ class CreateProfileActivityRequest extends ApiRequest
     public function rules()
     {
         return [
-            'data' => new ProfileActivityRule
+            'data' => ['required', new ProfileActivityRule]
         ];
     }
 }
