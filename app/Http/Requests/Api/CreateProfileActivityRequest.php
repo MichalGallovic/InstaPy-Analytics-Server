@@ -2,8 +2,6 @@
 
 namespace App\Http\Requests\Api;
 
-use App\Rules\ProfileActivityRule;
-
 class CreateProfileActivityRequest extends ApiRequest
 {
     /**
@@ -24,7 +22,14 @@ class CreateProfileActivityRequest extends ApiRequest
     public function rules()
     {
         return [
-            'data' => ['required', new ProfileActivityRule]
+            'data' => 'required',
+            'data.*.profile_name' => 'required',
+            'data.*.likes' => 'required|numeric',
+            'data.*.comments' => 'required|numeric',
+            'data.*.follows' => 'required|numeric',
+            'data.*.unfollows' => 'required|numeric',
+            'data.*.server_calls' => 'required|numeric',
+            'data.*.logged_at' => 'required|date_format:"Y-m-d H:i:s"'
         ];
     }
 }

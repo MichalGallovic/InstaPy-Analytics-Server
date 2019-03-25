@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Feature\Api;
 
 use App\Client;
 use App\Profile;
@@ -36,8 +36,7 @@ class CreateProfileActivitiesTest extends TestCase
         ];
 
         $response = $this->json('POST', '/api/profile/activities', $profileActivities);
-
-        $this->assertEquals(JsonResponse::HTTP_CREATED, $response->getStatusCode());
+        $response->assertStatus(JsonResponse::HTTP_CREATED);
 
         $profiles->each(function (Profile $profile) {
             $this->assertDatabaseHas('profile_activities', [
@@ -68,8 +67,7 @@ class CreateProfileActivitiesTest extends TestCase
         ];
 
         $response = $this->json('POST', '/api/profile/activities', $profileActivities);
-
-        $this->assertEquals(JsonResponse::HTTP_CREATED, $response->getStatusCode());
+        $response->assertStatus(JsonResponse::HTTP_CREATED);
 
         $profiles = Profile::all();
 
@@ -103,16 +101,14 @@ class CreateProfileActivitiesTest extends TestCase
         ];
 
         $response = $this->json('POST', '/api/profile/activities', $profileActivities);
-
-        $this->assertTrue($response->getStatusCode() === JsonResponse::HTTP_CREATED);
+        $response->assertStatus(JsonResponse::HTTP_CREATED);
 
         $this->assertDatabaseHas('profile_activities', [
             'profile_id' => $profile->id
         ]);
 
         $response = $this->json('POST', '/api/profile/activities', $profileActivities);
-
-        $this->assertEquals(JsonResponse::HTTP_OK, $response->getStatusCode());
+        $response->assertStatus(JsonResponse::HTTP_OK);
 
         $this->assertCount(1, ProfileActivity::all());
     }

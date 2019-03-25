@@ -15,5 +15,5 @@ use Illuminate\Http\Request;
 
 Route::middleware('auth:api')->group(function() {
     Route::post('profile/activities', 'Api\ProfileActivityController@create');
-    Route::post('profile/progress', 'Api\ProfileProgressController@create');
+    Route::post('profile/progresses', 'Api\ProfileProgressController@create');
 });

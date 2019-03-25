@@ -1,18 +1,16 @@
 <?php
 
-namespace Tests\Integration;
+namespace Tests\Feature\Repositories;
 
 use App\Profile;
 use App\ProfileActivity;
 use App\Repositories\ProfileActivityRepository;
-use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class ProfileActivityQueryTest extends TestCase
+class ProfileActivityRepositoryTest extends TestCase
 {
     use RefreshDatabase;
-    use InteractsWithDatabase;
 
     public function test_create_one_profile_activity()
     {

@@ -11,8 +11,13 @@ class Profile extends Model
         'name'
     ];
 
-    public function profileActivity()
+    public function profileActivities()
     {
         return $this->hasMany(ProfileActivity::class);
+    }
+
+    public function profileProgresses()
+    {
+        return $this->hasMany(ProfileProgress::class);
     }
 }

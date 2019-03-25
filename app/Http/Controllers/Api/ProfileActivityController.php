@@ -10,14 +10,14 @@ use Illuminate\Http\JsonResponse;
 class ProfileActivityController extends Controller
 {
     /** @var ProfileActivityRepository */
-    private $profileActivity;
+    private $profileActivityRepository;
 
     /**
-     * @param ProfileActivityRepository $profileActivity
+     * @param ProfileActivityRepository $profileActivityRepository
      */
-    public function __construct(ProfileActivityRepository $profileActivity)
+    public function __construct(ProfileActivityRepository $profileActivityRepository)
     {
-        $this->profileActivity = $profileActivity;
+        $this->profileActivityRepository = $profileActivityRepository;
     }
 
     /**
@@ -29,7 +29,7 @@ class ProfileActivityController extends Controller
     {
         $validatedActivities = $request->validated();
 
-        $profileActivities = $this->profileActivity->createMany($validatedActivities['data']);
+        $profileActivities = $this->profileActivityRepository->createMany($validatedActivities['data']);
 
         if ($profileActivities->isEmpty()) {
             return response()->json([

@@ -27,14 +27,14 @@ class ProfileActivityRepository
      * @param string $profileName
      * @param array  $profileActivity
      *
-     * @return null
+     * @return null|ProfileActivity
      */
     public function create(string $profileName, array $profileActivity)
     {
         $profile = $this->profile->where('name', $profileName)
             ->firstOrCreate(['name' => $profileName]);
 
-        $hasActivity = $profile->profileActivity()
+        $hasActivity = $profile->profileActivities()
             ->where('logged_at', $profileActivity['logged_at'])
             ->count();
 
@@ -51,7 +51,7 @@ class ProfileActivityRepository
             'logged_at'    => $profileActivity['logged_at'],
         ]);
 
-        return $profile->profileActivity()->save($profileActivity);
+        return $profile->profileActivities()->save($profileActivity);
     }
 
     /**

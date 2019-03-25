@@ -22,11 +22,12 @@ class CreateProfileProgressRequest extends ApiRequest
     public function rules()
     {
         return [
-            'username' => 'required',
-            'followers' => 'required|numeric',
-            'following' => 'required|numeric',
-            'total_posts' => 'required|numeric',
-            'logged_at' => 'required|date_format:YYYY-mm-dd H:i:s'
+            'data' => 'required',
+            'data.*.profile_name' => 'required',
+            'data.*.followers' => 'required|numeric',
+            'data.*.following' => 'required|numeric',
+            'data.*.total_posts' => 'required|numeric',
+            'data.*.logged_at' => 'required|date_format:"Y-m-d H:i:s"'
         ];
     }
 }

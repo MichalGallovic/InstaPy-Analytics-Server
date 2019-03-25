@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProfileProgressTable extends Migration
+class CreateProfileProgressesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProfileProgressTable extends Migration
      */
     public function up()
     {
-        Schema::create('profile_progress', function (Blueprint $table) {
+        Schema::create('profile_progresses', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('profile_id');
             $table->foreign('profile_id')
