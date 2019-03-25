@@ -4,7 +4,7 @@ namespace Tests\Integration;
 
 use App\Profile;
 use App\ProfileActivity;
-use App\Queries\ProfileActivityQuery;
+use App\Repositories\ProfileActivityRepository;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -16,7 +16,7 @@ class ProfileActivityQueryTest extends TestCase
 
     public function test_create_one_profile_activity()
     {
-        $profileActivityQuery = new ProfileActivityQuery(
+        $profileActivityQuery = new ProfileActivityRepository(
             new Profile(), new ProfileActivity()
         );
 
@@ -40,7 +40,7 @@ class ProfileActivityQueryTest extends TestCase
 
     public function test_create_many_profile_activities()
     {
-        $profileActivityQuery = new ProfileActivityQuery(
+        $profileActivityQuery = new ProfileActivityRepository(
             new Profile(), new ProfileActivity()
         );
 

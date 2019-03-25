@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Queries;
+namespace App\Repositories;
 
 use App\Profile;
 use App\ProfileActivity;
 
-class ProfileActivityQuery
+class ProfileActivityRepository
 {
     /** @var Profile */
     private $profile;

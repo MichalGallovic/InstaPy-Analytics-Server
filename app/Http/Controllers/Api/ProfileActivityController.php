@@ -4,18 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\CreateProfileActivityRequest;
-use App\Queries\ProfileActivityQuery;
+use App\Repositories\ProfileActivityRepository;
 use Illuminate\Http\JsonResponse;
 
 class ProfileActivityController extends Controller
 {
-    /** @var ProfileActivityQuery */
+    /** @var ProfileActivityRepository */
     private $profileActivity;
 
     /**
-     * @param ProfileActivityQuery $profileActivity
+     * @param ProfileActivityRepository $profileActivity
      */
-    public function __construct(ProfileActivityQuery $profileActivity)
+    public function __construct(ProfileActivityRepository $profileActivity)
     {
         $this->profileActivity = $profileActivity;
     }
