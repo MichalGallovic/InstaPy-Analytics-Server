@@ -3,6 +3,7 @@
 namespace App\Console;
 
 use App\Console\Commands\AddAnalyticsClient;
+use App\Console\Commands\CreateAdminAcount;
 use App\Console\Commands\RefreshAnalyticsClientToken;
 use App\Console\Commands\RevokeAnalyticsClientToken;
 use Illuminate\Console\Scheduling\Schedule;
@@ -18,7 +19,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         AddAnalyticsClient::class,
         RefreshAnalyticsClientToken::class,
-        RevokeAnalyticsClientToken::class
+        RevokeAnalyticsClientToken::class,
+        CreateAdminAcount::class
     ];
 
     /**
